@@ -1,6 +1,8 @@
 from django.urls import path
-from app_blog import views
+from .views import HomePageView, ArticleDetail, ArticleCategory
 
 urlpatterns = [
-    path('', views.HomePageView.as_view()),
+    path('', HomePageView.as_view(), name='home'),
+    path('category/<slug:slug>/', ArticleCategory.as_view(), name='articles-category-list'),
+    path('articles/<int:year>/<int:month>/<int:day>/<slug:slug>/', ArticleDetail.as_view(), name='news-detail'),
 ]

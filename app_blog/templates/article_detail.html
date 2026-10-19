@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block content %}
+<article class="post bg-white p-4 rounded border">
+    <h2>{{ article.title }}</h2>
+    <p class="text-muted">Опубліковано: {{ article.pub_date|date:"d.m.Y H:i" }}</p>
+    
+    {% if article.images.all %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+    <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+        {% for img in article.images.all %}
+            <img src="{{ img.image.url }}" alt="{{ img.title }}" data-caption="{{ img.title }}">
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+    <div class="content mt-3">
+        {{ article.description|linebreaks }}
+    </div>
+</article>
+{% endblock %}
